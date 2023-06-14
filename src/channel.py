@@ -41,7 +41,7 @@ class Channel:
         """
         Метод операции сложения.
         """
-        return self.video_count + other.video_count
+        return int(self.video_count) + int(other.video_count)
 
     def __sub__(self, other):
         """
@@ -53,13 +53,13 @@ class Channel:
         """
         Метод операции сравнения "больше".
         """
-        return self.subscriber_count > other.subscriber_count
+        return int(self.subscriber_count) > int(other.subscriber_count)
 
     def __ge__(self, other):
         """
         Метод операции сравнения "больше или равно".
         """
-        return self.subscriber_count >= other.subscriber_count
+        return int(self.subscriber_count) >= int(other.subscriber_count)
 
     def print_info(self) -> None:
         """
