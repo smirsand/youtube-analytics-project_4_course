@@ -31,6 +31,36 @@ class Channel:
         self.video_count = statistics['videoCount']
         self.view_count = statistics['viewCount']
 
+    def __str__(self):
+        """
+        Возвращает название канала и ссылку.
+        """
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """
+        Метод операции сложения.
+        """
+        return self.video_count + other.video_count
+
+    def __sub__(self, other):
+        """
+        Метод операции вычитания.
+        """
+        return int(self.video_count) - int(other.video_count)
+
+    def __gt__(self, other):
+        """
+        Метод операции сравнения "больше".
+        """
+        return self.subscriber_count > other.subscriber_count
+
+    def __ge__(self, other):
+        """
+        Метод операции сравнения "больше или равно".
+        """
+        return self.subscriber_count >= other.subscriber_count
+
     def print_info(self) -> None:
         """
         Выводит в консоль информацию о канале.
