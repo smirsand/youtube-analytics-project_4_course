@@ -1,4 +1,7 @@
 class Video:
+    """
+    Класс который инициализирует 'id видео'.
+    """
     def __init__(self, likes=None, id_video=None, title='GIL в Python: зачем он нужен и как с этим жить', url=None,
                  views=None):
         self.id_video = id_video
@@ -12,6 +15,9 @@ class Video:
 
 
 class PLVideo(Video):
+    """
+    Класс который инициализирует 'id плейлиста'.
+    """
     def __init__(self, likes, id_playlist):
         super().__init__(likes)
         self.title = 'MoscowPython Meetup 78 - вступление'
