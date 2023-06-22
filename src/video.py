@@ -39,9 +39,7 @@ class PLVideo(Video):
         self.playlist_id = playlist_id
 
         try:
-            playlist_response = youtube.playlists().list(part='snippet', id=playlist_id).execute()
-            playlist_title = playlist_response['items'][0]['snippet']['title']
-            playlist_url = f"https://www.youtube.com/playlist?list={playlist_id}"
+            youtube.playlists().list(part='snippet', id=playlist_id).execute()
         except HttpError as error:
             print('An error occurred: %s' % error)
 
