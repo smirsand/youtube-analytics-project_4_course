@@ -53,5 +53,19 @@ class PLVideo(Video):
         super().__init__(id_video)
         self.playlist_id = playlist_id
 
+    @staticmethod
+    def playlist_info(playlist_id):
+        try:
+            playlist_response = youtube.playlists().list(id=playlist_id).execute()
+            playlist_title = playlist_response['items'][0]['snippet']['title']
+            playlist_url = f"https://www.youtube.com/playlist?list={playlist_id}"
+            return {
+                'playlist_id': playlist_id,
+                'playlist_title': playlist_title,
+                'playlist_url': playlist_url
+            }
+        except HttpError as error:
+            print('An error occurred: %s' % error)
+
     def __str__(self):
         return self.video_title
