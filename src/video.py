@@ -14,19 +14,23 @@ class Video:
 
     def __init__(self, id_video):
         self.id_video = id_video
+        self.title = None
+        self.like_count = None
 
         try:
             video_response = youtube.videos().list(id=id_video, part='snippet,statistics').execute()
-            self.video_title = video_response['items'][0]['snippet']['title']
-            self.video_url = f"https://www.youtube.com/watch?v={id_video}"
-            self.views_count = video_response['items'][0]['statistics']['viewCount']
-            self.likes_count = video_response['items'][0]['statistics']['likeCount']
-
+            if 'items' in video_response and video_response['items']:
+                self.title = video_response['items'][0]['snippet']['title']
+                self.video_url = f"https://www.youtube.com/watch?v={id_video}"
+                self.views_count = video_response['items'][0]['statistics']['viewCount']
+                self.like_count = video_response['items'][0]['statistics']['likeCount']
         except HttpError as error:
             print('An error occurred: %s', error)
 
     def __str__(self):
-        return self.video_title
+        if self.title is None:
+            return "No title"
+        return self.title
 
 
 class PLVideo(Video):
@@ -44,4 +48,4 @@ class PLVideo(Video):
             print('An error occurred: %s' % error)
 
     def __str__(self):
-        return self.video_title
+        return self.title
